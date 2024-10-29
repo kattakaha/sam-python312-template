@@ -1,0 +1,49 @@
+# ref https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+changelog:
+  exclude:
+    labels:
+      - release
+      - skip-changelog
+    authors:
+      - octocat
+  categories:
+    - title: 👍 Features
+      labels:
+        - enhancement
+    - title: 🚀 Performance Improvements
+      labels:
+        - improvement
+    - title: ♻️ Refactoring
+      labels:
+        - refactor
+    - title: 📝 Documentation
+      labels:
+        - documentation
+    - title: 🐛 Bug Fixes
+      labels:
+        - bug
+    - title: 🏗️ Build System
+      labels:
+        - build
+    - title: 🧪 Tests
+      labels:
+        - test
+    - title: 📦 Dependency Updates
+      labels:
+        - dependencies
+    - title: 🔨 Infrastructure
+      labels:
+        - infra
+    - title: 🚧 Work In Progress
+      labels:
+        - wip
+    - title: 🚨 Code Style
+      labels:
+        - code-style
+    - title: 💚 CI/CD
+      labels:
+        - ci
+    - title: 🔥 Destructive
+      labels:
+        - destructive
