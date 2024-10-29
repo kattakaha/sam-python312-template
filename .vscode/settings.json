@@ -12,5 +12,21 @@
     },
     "black-formatter.args": [
         "--line-length=120"
-    ]
+    ],
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "template.yaml",
+                "cmd": "sam build"
+            },
+            {
+                "match": "requirements.txt",
+                "cmd": "sam build"
+            },
+            {
+                "match": ".*.py",
+                "cmd": "sam build"
+            }
+        ]
+    }
 }

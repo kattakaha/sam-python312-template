@@ -6,6 +6,7 @@
         "donjayamanne.python-extension-pack",
         "wayou.vscode-todo-highlight",
         "ms-python.mypy-type-checker",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "emeraldwalk.RunOnSave"
     ]
 }
