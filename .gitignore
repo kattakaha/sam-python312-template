@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
 
+# poetry
+poetry.lock
+
 ### Linux ###
 *~
 
@@ -177,7 +180,7 @@ target/
 .ipynb_checkpoints
 
 # pyenv
-.python-version
+# .python-version
 
 # celery beat schedule file
 celerybeat-schedule.*
