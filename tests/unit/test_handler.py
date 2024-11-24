@@ -8,22 +8,23 @@ import pytest
 from src.handlers import app
 
 
-def lambda_context():
-    class LambdaContext:
-        def __init__(self):
-            self.function_name = "test-func"
-            self.memory_limit_in_mb = 128
-            self.invoked_function_arn = "arn:aws:lambda:eu-west-1:809313241234:function:test-func"
-            self.aws_request_id = "52fdfc07-2182-154f-163f-5f0f9a621d72"
+class LambdaContext:
+    def __init__(self) -> None:
+        self.function_name = "test-func"
+        self.memory_limit_in_mb = 128
+        self.invoked_function_arn = "arn:aws:lambda:eu-west-1:809313241234:function:test-func"
+        self.aws_request_id = "52fdfc07-2182-154f-163f-5f0f9a621d72"
 
-        def get_remaining_time_in_millis(self) -> int:
-            return 1000
+    def get_remaining_time_in_millis(self) -> int:
+        return 1000
 
+
+def lambda_context() -> LambdaContext:
     return LambdaContext()
 
 
 @pytest.fixture()
-def apigw_event():
+def apigw_event() -> dict:
     """Generates API GW Event"""
 
     return {
@@ -73,7 +74,7 @@ def apigw_event():
             "X-Forwarded-Proto": ["http"],
         },
         "multiValueQueryStringParameters": "",
-        "path": "/hello",
+        "path": "/healthcheck",
         "pathParameters": "",
         "queryStringParameters": "",
         "requestContext": {
@@ -94,26 +95,26 @@ def apigw_event():
                 "userAgent": "Custom User Agent String",
                 "userArn": "",
             },
-            "path": "/hello",
+            "path": "/healthcheck",
             "protocol": "HTTP/1.1",
             "requestId": "a3590457-cac2-4f10-8fc9-e47114bf7c62",
             "requestTime": "02/Feb/2023:11:45:26 +0000",
             "requestTimeEpoch": 1675338326,
             "resourceId": "123456",
-            "resourcePath": "/hello",
+            "resourcePath": "/healthcheck",
             "stage": "Prod",
         },
-        "resource": "/hello",
+        "resource": "/healthcheck",
         "stageVariables": "",
         "version": "1.0",
     }
 
 
-def test_lambda_handler(apigw_event):
+def test_lambda_handler(apigw_event: dict) -> None:
 
     ret = app.lambda_handler(apigw_event, lambda_context())
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == 200
-    assert "message" in ret["body"]
-    assert data["message"] == "hello world"
+    assert "status" in ret["body"]
+    assert data["status"] == "ok"

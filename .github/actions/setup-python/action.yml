@@ -1,0 +1,18 @@
+name: Set up Python
+description: Set up Python
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: ".python-version"
+        architecture: "x64"
+
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+      shell: bash

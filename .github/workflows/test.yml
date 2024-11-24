@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up AWS SAM
+        uses: ./.github/actions/setup-sam
+
+      - name: Set up Python
+        uses: ./.github/actions/setup-python
+
+      - name: Install pip dependencies
+        uses: ./.github/actions/install-pip-dependencies
+
+      - name: Run format
+        run: poetry run task format
+
+      - name: Run lint
+        run: poetry run task lint
+
+      - name: Run test
+        run: poetry run task test
+
+      - name: Build
+        run: poetry run task build

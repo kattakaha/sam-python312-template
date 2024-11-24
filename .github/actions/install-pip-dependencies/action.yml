@@ -1,0 +1,13 @@
+name: Install pip dependencies
+description: Install dependencies using pip
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install poetry
+      run: pip install poetry
+      shell: bash
+
+    - name: Install dependencies
+      run: poetry install --no-root
+      shell: bash
