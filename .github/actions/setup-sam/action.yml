@@ -1,0 +1,12 @@
+name: Set up AWS SAM
+description: Set up AWS SAM (Serverless Application Model)
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up AWS CLI
+      uses: aws-actions/setup-sam@v2
+      shell: bash
