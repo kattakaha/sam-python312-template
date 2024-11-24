@@ -40,6 +40,9 @@ boto3-stubs = { version = "1.35.67", extras = [
 
 
 [tool.taskipy.tasks]
+export = "poetry export -f requirements.txt --output src/requirements.txt --without-hashes"
+build = "task export && sam build"
+dev = "task build && sam local start-api"
 test = "pytest -s -vv --cov=. --cov-branch --cov-report=html"
 format = "task format-black && task format-isort"
 format-black = "black ./src ./tests"
