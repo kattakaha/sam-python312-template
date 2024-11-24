@@ -14,4 +14,3 @@ runs:
 
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
-      shell: bash
