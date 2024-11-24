@@ -29,3 +29,36 @@ warm_containers = "EAGER"
 
 [default.local_start_lambda.parameters]
 warm_containers = "EAGER"
+
+[local]
+[local.global.parameters]
+stack_name = "local-sam-python312-template"
+parameter_overrides = [
+    "Stage=local",
+    "ApiVersionHash=latest",
+    "ApiCorsAllowedOrigins=http://localhost:3000,http://localhost:3005",
+]
+
+[local.build.parameters]
+cached = true
+parallel = true
+template = "./template.yaml"
+
+[local.validate.parameters]
+lint = true
+
+[local.deploy.parameters]
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = false
+region = "ap-northeast-1"
+s3_bucket = "local-physical-support-backend-deployment-bucket"
+tags = ["STAGE=local"]
+
+[local.local_start_api.parameters]
+warm_containers = "EAGER"
+
+[local.local_start_lambda.parameters]
+warm_containers = "EAGER"
+
+[local.sync.parameters]
+watch = false
