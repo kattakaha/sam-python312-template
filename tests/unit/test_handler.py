@@ -5,7 +5,7 @@ import json
 import pytest
 
 # First Party Library
-from src import app
+from src.handlers import app
 
 
 def lambda_context():

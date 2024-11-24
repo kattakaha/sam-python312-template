@@ -3,6 +3,25 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   sam-python312-template
 
+Parameters:
+  Stage:
+    Type: String
+    Default: local
+    AllowedValues:
+      - local
+      - dev
+      - stg
+      - prod
+    Description: Envitonment stage name
+  ApiVersionHash:
+    Type: String
+    Default: latest
+    Description: API version hash
+  ApiCorsAllowedOrigins:
+    Type: String
+    Default: http://localhost:3000,http://localhost:3005
+    Description: comma separated allowed origins for CORS
+
 Globals: # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-template-anatomy-globals.html
   Function:
     Timeout: 30
@@ -13,30 +32,43 @@ Globals: # https://docs.aws.amazon.com/serverless-application-model/latest/devel
     # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
       LogFormat: JSON
+    Environment:
+      Variables:
+        STAGE: !Ref Stage
   Api:
     TracingEnabled: true
+
 Resources:
+  apiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      Name: !Sub "${Stage}-sam-api"
+      Description: "API Gateway for SAM Python 3.12"
+      Tags:
+        STAGE: !Ref Stage
+
   ApiHandler:
     Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html
     Properties:
-      Handler: src/app.lambda_handler
-      CodeUri: app
+      Handler: handlers/app.lambda_handler
+      CodeUri: src
       Description: Api handler function
       Architectures:
         - x86_64
       Tracing: Active
       Events:
-        HelloPath:
+        RestApi:
           Type: Api # More info about API Event Source: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-api.html
           Properties:
-            Path: /hello
-            Method:
-              GET
-              # Powertools env vars: https://awslabs.github.io/aws-lambda-powertools-python/#environment-variables
+            Path: /{proxy+}
+            Method: ANY
       Environment:
         Variables:
-          POWERTOOLS_SERVICE_NAME: PowertoolsHelloWorld
-          POWERTOOLS_METRICS_NAMESPACE: Powertools
+          API_VERSION_HASH: !Ref ApiVersionHash
+          CORS_ALLOWED_ORIGINS: !Ref ApiCorsAllowedOrigins
+          POWERTOOLS_SERVICE_NAME: SamApiService
+          POWERTOOLS_METRICS_NAMESPACE: SamApi
           LOG_LEVEL: INFO
       Tags:
         LambdaPowertools: python
@@ -56,10 +88,8 @@ Resources:
       AutoConfigurationEnabled: "true"
 
 Outputs:
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod environment for Hello World Function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello"
-
-  ApiHandlerFunction:
-    Description: Api handler Lambda Function ARN
-    Value: !GetAtt ApiHandler.Arn
+  ApiGatewayUrl:
+    Description: "API Swagger URL"
+    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/swagger"
+    Export:
+      Name: !Sub "${AWS::StackName}-ApiUrl"
