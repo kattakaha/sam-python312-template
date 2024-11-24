@@ -9,4 +9,3 @@ runs:
 
     - name: Set up AWS CLI
       uses: aws-actions/setup-sam@v2
-      shell: bash
