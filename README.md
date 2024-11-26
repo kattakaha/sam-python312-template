@@ -10,11 +10,13 @@ AWS SAM Python3.12 template repository
 - [ ] pyenv
 - [ ] wsl2 Ubuntu
 - [ ] Docker
+- [ ] sam
 
 ここら辺参考になるかも
 
 - <https://qiita.com/kkml_4220/items/9daf2117e515e5342bac>
 - <https://qiita.com/kkml_4220/items/1b239b3aabfabc6f5586>
+- <https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/install-sam-cli.html>
 
 ## Installation
 
