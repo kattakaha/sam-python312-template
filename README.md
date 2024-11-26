@@ -55,7 +55,7 @@ poetry run task test
 ```
 
 > [!TIP]
-> 仮想環境に入った状態(=`poetry shell`)で実行する場合は、`poetry run`を省略可能です。
+> 仮想環境に`poetry shell`入った状態で実行する場合は、`poetry run`を省略可能です。
 
 ```bash
 # start local api server
