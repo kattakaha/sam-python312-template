@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.12"
 aws-lambda-powertools = "^3.0.0"
 pydantic = "^2.10.2"
-fastjsonschema = "^2.21.0"
+fastjsonschema = "^2.21.1"
 aws-xray-sdk = "^2.13.0"
 
 
