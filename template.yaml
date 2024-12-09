@@ -61,6 +61,7 @@ Resources:
         RestApi:
           Type: Api # More info about API Event Source: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-api.html
           Properties:
+            RestApiId: !Ref apiGateway
             Path: /{proxy+}
             Method: ANY
       Environment:
