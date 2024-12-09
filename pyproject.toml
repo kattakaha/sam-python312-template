@@ -52,7 +52,8 @@ lint = "task lint-black && task lint-ruff && task lint-mypy"
 lint-ruff = "ruff check src tests"
 lint-mypy = "mypy src tests"
 lint-black = "black --check src tests"
-
+deploy = "sam deploy --config-file samconfig.toml --config-env dev"
+deploy-dev = "sam deploy --config-file samconfig.toml --config-env dev"
 
 [tool.black]
 line-length = 120
