@@ -13,10 +13,10 @@ Parameters:
       - stg
       - prod
     Description: Envitonment stage name
-  ApiVersionHash:
+  ApiVersion:
     Type: String
     Default: latest
-    Description: API version hash
+    Description: API Semantic Version
   ApiCorsAllowedOrigins:
     Type: String
     Default: http://localhost:3000,http://localhost:3005
@@ -39,7 +39,7 @@ Globals: # https://docs.aws.amazon.com/serverless-application-model/latest/devel
     TracingEnabled: true
 
 Resources:
-  apiGateway:
+  ApiGateway:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref Stage
@@ -51,7 +51,7 @@ Resources:
   ApiHandler:
     Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html
     Properties:
-      Handler: handlers/app.lambda_handler
+      Handler: v1/handlers/app.lambda_handler
       CodeUri: src
       Description: Api handler function
       Architectures:
@@ -61,12 +61,12 @@ Resources:
         RestApi:
           Type: Api # More info about API Event Source: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-api.html
           Properties:
-            RestApiId: !Ref apiGateway
+            RestApiId: !Ref ApiGateway
             Path: /{proxy+}
             Method: ANY
       Environment:
         Variables:
-          API_VERSION_HASH: !Ref ApiVersionHash
+          API_VERSION: !Ref ApiVersion
           CORS_ALLOWED_ORIGINS: !Ref ApiCorsAllowedOrigins
           POWERTOOLS_SERVICE_NAME: SamApiService
           POWERTOOLS_METRICS_NAMESPACE: SamApi
@@ -77,20 +77,18 @@ Resources:
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
     Properties:
-      Name:
-        Fn::Sub: ApplicationInsights-SAM-${AWS::StackName}
+      Name: !Sub ApplicationInsights-SAM-${AWS::StackName}
       ResourceQuery:
         Type: CLOUDFORMATION_STACK_1_0
   ApplicationInsightsMonitoring:
     Type: AWS::ApplicationInsights::Application
     Properties:
-      ResourceGroupName:
-        Ref: ApplicationResourceGroup
-      AutoConfigurationEnabled: "true"
+      ResourceGroupName: !Ref ApplicationResourceGroup
+      AutoConfigurationEnabled: true
 
 Outputs:
   ApiGatewayUrl:
     Description: "API Swagger URL"
-    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/swagger"
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/swagger"
     Export:
       Name: !Sub "${AWS::StackName}-ApiUrl"
