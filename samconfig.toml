@@ -37,7 +37,7 @@ warm_containers = "EAGER"
 stack_name = "local-sam-python312-template"
 parameter_overrides = [
     "Stage=local",
-    "ApiVersionHash=latest",
+    "ApiVersion=latest",
     "ApiCorsAllowedOrigins=http://localhost:3000,http://localhost:3005",
 ]
 
@@ -63,7 +63,7 @@ watch = false
 stack_name = "dev-sam-python312-template"
 parameter_overrides = [
     "Stage=dev",
-    "ApiVersionHash=latest",
+    "ApiVersion=latest",
     "ApiCorsAllowedOrigins=http://localhost:3000,http://localhost:3005",
 ]
 

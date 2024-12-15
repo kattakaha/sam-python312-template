@@ -55,6 +55,12 @@ lint-black = "black --check src tests"
 deploy = "sam deploy --config-file samconfig.toml --config-env dev"
 deploy-dev = "sam deploy --config-file samconfig.toml --config-env dev"
 
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = ["tests"]
+
+
 [tool.black]
 line-length = 120
 
