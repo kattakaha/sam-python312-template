@@ -5,7 +5,7 @@ import json
 import pytest
 
 # First Party Library
-from src.handlers import app
+from v1.handlers import app
 
 
 class LambdaContext:
@@ -118,3 +118,5 @@ def test_lambda_handler(apigw_event: dict) -> None:
     assert ret["statusCode"] == 200
     assert "status" in ret["body"]
     assert data["status"] == "ok"
+    assert "version" in ret["body"]
+    assert data["version"] == "latest"
