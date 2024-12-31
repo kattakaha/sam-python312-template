@@ -38,6 +38,7 @@ boto3-stubs = { version = "1.35.90", extras = [
     "ses",
     "sesv2",
 ] }
+toml = "^0.10.2"
 
 
 [tool.taskipy.tasks]
