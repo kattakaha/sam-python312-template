@@ -6,28 +6,23 @@ AWS SAM Python3.12 template repository
 
 ## 環境構築
 
-- [ ] nodenv
-- [ ] pyenv
 - [ ] wsl2 Ubuntu
+- [ ] pyenv
 - [ ] Docker
 - [ ] sam
 
 ここら辺参考になるかも
 
-- <https://qiita.com/kkml_4220/items/9daf2117e515e5342bac>
 - <https://qiita.com/kkml_4220/items/1b239b3aabfabc6f5586>
 - <https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/install-sam-cli.html>
 
 ## Installation
 
-`pyenv`を使って`Python`のバージョン合わせる場合は[こちらの記事](https://qiita.com/twipg/items/75fc9428e4c33ed429c0)を参考に`Python 3.12.6
-`を使用してください。
+Use `Python 3.12.6` version using `pyenv`.
 
 ```bash
 # install poetry
 pip install poetry
-# Poetry to use project-specific virtual env
-poetry config virtualenvs.in-project true
 # install virtual env
 poetry install
 # install npm dependencies
