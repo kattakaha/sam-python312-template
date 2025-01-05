@@ -29,4 +29,4 @@ jobs:
         run: poetry run poetry export -f requirements.txt --output requirements.txt --without-hashes
 
       - name: Run safety check
-        run: safety check -r requirements.txt
+        run: safety scan --target requirements.txt
