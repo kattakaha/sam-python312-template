@@ -24,8 +24,9 @@ jobs:
       - name: Install Safety
         run: pip install safety
 
+      # NOTE: Export requirements.txt using poetry-plugin-export from poetry venv.
       - name: Export requirements.txt
-        run: poetry run task export
+        run: poetry run poetry export -f requirements.txt --output requirements.txt --without-hashes
 
       - name: Run safety check
-        run: safety check -r src/requirements.txt
+        run: safety check -r requirements.txt
