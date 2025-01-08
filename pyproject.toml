@@ -28,7 +28,7 @@ isort = "^5.13.2"
 taskipy = "^1.14.1"
 mypy = "^1.14.1"
 boto3 = "^1.35.94"
-boto3-stubs = { version = "1.35.93", extras = [
+boto3-stubs = { version = "1.35.94", extras = [
     "apigateway",
     "apigatewaymanagementapi",
     "apigatewayv2",
