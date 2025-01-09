@@ -12,7 +12,7 @@ Parameters:
       - dev
       - stg
       - prod
-    Description: Envitonment stage name
+    Description: Enviromnent stage name
   ApiVersion:
     Type: String
     Default: latest
