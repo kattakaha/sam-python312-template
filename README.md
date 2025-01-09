@@ -13,7 +13,7 @@ AWS SAM Python3.12 template repository
 
 ここら辺参考になるかも
 
-- <https://qiita.com/kkml_4220/items/1b239b3aabfabc6f5586>
+- <https://qiita.com/kattakaha/items/1b239b3aabfabc6f5586>
 - <https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/install-sam-cli.html>
 
 ## Installation
