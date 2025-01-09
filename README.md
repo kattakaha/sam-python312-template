@@ -25,8 +25,6 @@ Use `Python 3.12.6` version using `pyenv`.
 pip install poetry
 # install virtual env
 poetry install
-# install npm dependencies
-npm install
 ```
 
 ## Usage
