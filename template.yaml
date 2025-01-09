@@ -68,7 +68,7 @@ Resources:
       Environment:
         Variables:
           API_VERSION: !Ref ApiVersion
-          CORS_ALLOWED_ORIGINS: !Ref ApiCorsAllowedOrigins
+          API_CORS_ALLOWED_ORIGINS: !Ref ApiCorsAllowedOrigins
           POWERTOOLS_SERVICE_NAME: SamApiService
           POWERTOOLS_METRICS_NAMESPACE: SamApi
           LOG_LEVEL: INFO
