@@ -7,7 +7,7 @@ from aws_lambda_powertools.event_handler.openapi.models import Contact, HTTPBear
 from pydantic.networks import AnyUrl
 
 # First Party Library
-from v1.config.settings import API_CORS_ALLOED_ORIGINS, STAGE
+from v1.config.settings import API_CORS_ALLOWED_ORIGINS, STAGE
 
 # APIのAuthor情報
 API_AUTHOR_NAME: Final[str] = "Takahashi Katsuyuki"
@@ -42,7 +42,7 @@ AUTHORIZATION_HEADER: Final[dict[str, SecurityScheme]] = {"Authorization": HTTPB
 SECURITY_REQUIREMENTS: Final[list[dict[str, List[str]]]] = [{"Authorization": []}]
 
 # CORS 許可のオリジンリスト
-API_CORS_ALLOWED_ORIGIN_LIST: Final[list[str]] = API_CORS_ALLOED_ORIGINS.split(",")
+API_CORS_ALLOWED_ORIGIN_LIST: Final[list[str]] = API_CORS_ALLOWED_ORIGINS.split(",")
 
 API_CORS_CONFIG = CORSConfig(
     allow_origin=API_CORS_ALLOWED_ORIGIN_LIST[0],
