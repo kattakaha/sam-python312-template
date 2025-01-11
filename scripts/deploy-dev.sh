@@ -25,3 +25,8 @@ sam deploy \
     --config-file samconfig.toml \
     --config-env dev \
     --no-fail-on-empty-changeset
+
+echo "Restore samconfig.toml"
+git restore samconfig.toml
+
+echo "Deployed to dev environment successfully"
