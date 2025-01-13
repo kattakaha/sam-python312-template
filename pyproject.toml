@@ -39,7 +39,7 @@ boto3-stubs = { version = "1.35.96", extras = [
     "sesv2",
 ] }
 toml = "^0.10.2"
-poetry-plugin-export = "^1.8.0"
+poetry-plugin-export = "^1.9.0"
 
 
 [tool.taskipy.tasks]
