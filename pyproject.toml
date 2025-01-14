@@ -8,7 +8,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-aws-lambda-powertools = "^3.4.0"
+aws-lambda-powertools = "^3.4.1"
 pydantic = "^2.10.5"
 fastjsonschema = "^2.21.1"
 aws-xray-sdk = "^2.13.0"
