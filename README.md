@@ -21,7 +21,7 @@ AWS SAM Python3.12 template repository
 Use `Python 3.12.6` version using `pyenv`.
 
 ```bash
-# install poetry
+# install poetry v2
 pip install poetry
 # install virtual env
 poetry install
