@@ -24,7 +24,7 @@ jobs:
         uses: ./.github/actions/install-pip-dependencies
 
       - name: Run format
-        run: poetry run task format
+        run: poetry run task ci-format
 
       - name: Run lint
         run: poetry run task lint
