@@ -8,8 +8,8 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-aws-lambda-powertools = "^3.4.0"
-pydantic = "^2.10.4"
+aws-lambda-powertools = "^3.4.1"
+pydantic = "^2.10.5"
 fastjsonschema = "^2.21.1"
 aws-xray-sdk = "^2.13.0"
 
@@ -20,15 +20,15 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
-ruff = "^0.8.6"
+ruff = "^0.9.2"
 pytest = "^8.3.4"
 pytest-mock = "^3.14.0"
 pytest-cov = "^6.0.0"
 isort = "^5.13.2"
 taskipy = "^1.14.1"
 mypy = "^1.14.1"
-boto3 = "^1.35.92"
-boto3-stubs = { version = "1.35.92", extras = [
+boto3 = "^1.36.0"
+boto3-stubs = { version = "1.36.5", extras = [
     "apigateway",
     "apigatewaymanagementapi",
     "apigatewayv2",
@@ -39,7 +39,8 @@ boto3-stubs = { version = "1.35.92", extras = [
     "sesv2",
 ] }
 toml = "^0.10.2"
-poetry-plugin-export = "^1.8.0"
+poetry-plugin-export = "^1.9.0"
+poetry-plugin-shell = "^1.0.1"
 
 
 [tool.taskipy.tasks]
@@ -47,13 +48,15 @@ export = "poetry export -f requirements.txt --output src/requirements.txt --with
 build = "task export && sam build"
 dev = "task build && sam local start-api"
 test = "pytest -s -vv --cov=. --cov-branch --cov-report=html"
+ci-format = "task ci-format-black && task ci-format-isort"
 format = "task format-black && task format-isort"
+ci-format-black = "black --check src tests"
 format-black = "black ./src ./tests"
+ci-format-isort = "isort --check-only ./src ./tests"
 format-isort = "isort ./src ./tests"
-lint = "task lint-black && task lint-ruff && task lint-mypy"
+lint = "task lint-ruff && task lint-mypy"
 lint-ruff = "ruff check src tests"
 lint-mypy = "mypy src tests"
-lint-black = "black --check src tests"
 deploy = "sam deploy --config-file samconfig.toml --config-env dev"
 deploy-dev = "sam deploy --config-file samconfig.toml --config-env dev"
 
