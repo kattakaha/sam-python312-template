@@ -29,7 +29,7 @@ Globals: # https://docs.aws.amazon.com/serverless-application-model/latest/devel
     Runtime: python3.12
 
     Tracing: Active
-    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
+    # You can add LoggingConfig parameters such as the Log format, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
       LogFormat: JSON
     Environment:
@@ -45,6 +45,9 @@ Resources:
       StageName: !Ref Stage
       Name: !Sub "${Stage}-sam-api"
       Description: "API Gateway for SAM Python 3.12"
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS,PUT,DELETE,PATCH'"
+        AllowHeaders: "'Content-Type,Authorization'"
       Tags:
         STAGE: !Ref Stage
 
