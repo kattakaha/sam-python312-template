@@ -4,12 +4,8 @@ from typing import Callable, TypeVar
 # Third Party Library
 from aws_lambda_powertools import Logger
 from aws_lambda_powertools.event_handler import APIGatewayRestResolver, Response
-from aws_lambda_powertools.event_handler.exceptions import UnauthorizedError
 from aws_lambda_powertools.event_handler.middlewares import NextMiddleware
 from aws_lambda_powertools.middleware_factory import lambda_handler_decorator
-
-# First Party Library
-from v1.config.server_info import API_CORS_ALLOWED_ORIGIN_LIST
 
 logger = Logger()
 
@@ -34,42 +30,6 @@ def log_request_response(app: APIGatewayRestResolver, next_middleware: NextMiddl
     result = next_middleware(app)
     logger.info("Response received", response=result.__dict__)
 
-    return result
-
-
-def cors_middleware(app: APIGatewayRestResolver, next_middleware: NextMiddleware) -> Response:
-    """Middleware to handle CORS
-
-    Args:
-        app (APIGatewayRestResolver): app instance
-        next_middleware (NextMiddleware): next middleware
-
-    Returns:
-        Response: api response
-    """
-    origin = app.current_event.headers.get("origin")
-    # Originがない時はSwaggerからのリクエスト
-    if not origin:
-        logger.info("Origin", extra={"origin": origin})
-        response = next_middleware(app)
-        logger.info("Response", extra={"response": response})
-        return response
-    logger.info("Origin", extra={"origin": origin})
-    if origin not in API_CORS_ALLOWED_ORIGIN_LIST:
-        raise UnauthorizedError("Invalid origin")
-    result = next_middleware(app)
-    if app.current_event.path == "/dev":
-        result.headers = {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-        }
-        return result
-    result.headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": origin,
-        "Access-Control-Allow-Headers": "Content-Type",
-    }
     return result
 
 

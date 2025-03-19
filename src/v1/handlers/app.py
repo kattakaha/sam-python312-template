@@ -10,16 +10,16 @@ from aws_lambda_powertools.utilities.typing import LambdaContext
 # First Party Library
 from v1.config.server_info import API_CORS_CONFIG, CONTACT, SERVERS
 from v1.config.settings import API_VERSION, STAGE
+from v1.middlewares.common import log_request_response
 from v1.schemas import errors
 from v1.schemas.healthcheck import HealthCheck
-from v1.middlewares.common import log_request_response, cors_middleware
 
 SERVICE_NAME = "AppApiHandler"
 
 is_debug = True if STAGE == "local" or STAGE == "dev" else False
 
 app = APIGatewayRestResolver(cors=API_CORS_CONFIG, enable_validation=True, debug=is_debug)
-app.use(middlewares=[log_request_response, cors_middleware])
+app.use(middlewares=[log_request_response])
 
 if STAGE == "local" or STAGE == "dev":
     app.enable_swagger(
