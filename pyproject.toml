@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sam-python312-template"
 version = "0.1.0"
-description = ""
+description = "AWS SAM Python3.12 template repository"
 authors = ["Takahashi Katsuyuki <kattakaha@gmail.com>"]
 readme = "README.md"
 package-mode = false
@@ -62,8 +62,8 @@ format-isort = "isort ./src ./tests"
 lint = "task lint-ruff && task lint-mypy"
 lint-ruff = "ruff check src tests"
 lint-mypy = "mypy src tests"
-deploy = "sam deploy --config-file samconfig.toml --config-env dev"
-deploy-dev = "sam deploy --config-file samconfig.toml --config-env dev"
+deploy = "task build && sam deploy --config-file samconfig.toml --config-env dev"
+deploy-dev = "task build && sam deploy --config-file samconfig.toml --config-env dev"
 
 
 [tool.pytest.ini_options]
