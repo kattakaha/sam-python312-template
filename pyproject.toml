@@ -45,7 +45,7 @@ poetry-plugin-shell = "^1.0.1"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
 pytest-mock = "^3.14.0"
-pytest-cov = "^6.0.0"
+pytest-cov = "^7.0.0"
 pytest-env = "^1.1.5"
 pytest-xdist = "^3.7.0"
 
