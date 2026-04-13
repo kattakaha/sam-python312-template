@@ -22,7 +22,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 black = "^26.1.0"
-ruff = "^0.15.0"
+ruff = "^0.15.10"
 isort = "^8.0.0"
 taskipy = "^1.14.1"
 mypy = "^1.14.1"
