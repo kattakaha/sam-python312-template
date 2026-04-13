@@ -9,10 +9,10 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-aws-lambda-powertools = "^3.4.1"
-pydantic = "^2.10.5"
+aws-lambda-powertools = "^3.27.0"
+pydantic = "^2.13.0"
 fastjsonschema = "^2.21.1"
-aws-xray-sdk = "^2.13.0"
+aws-xray-sdk = "^2.15.0"
 
 
 [build-system]
@@ -38,7 +38,7 @@ boto3-stubs = { version = "1.42.87", extras = [
     "sesv2",
 ] }
 toml = "^0.10.2"
-poetry-plugin-export = "^1.9.0"
+poetry-plugin-export = "^1.10.0"
 poetry-plugin-shell = "^1.0.1"
 
 
